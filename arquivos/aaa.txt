@@ -1,0 +1,21 @@
+CREATE TABLE `comissao` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`id_lancamento` INT(11) NULL DEFAULT NULL,
+	`pj` TINYINT(4) NULL DEFAULT '0',
+	`nota_fiscal` VARCHAR(255) NOT NULL,
+	`status` INT(11) NOT NULL DEFAULT '0',
+	`id_tipo_comissao` INT(10) NOT NULL,
+	`valor` VARCHAR(255) NOT NULL,
+	`id_forma_pagamento` INT(10) NOT NULL,
+	`data_vencimento` DATE NOT NULL,
+	`numero_cheque` VARCHAR(255) NULL DEFAULT NULL,
+	`id_banco` INT(10) NULL DEFAULT NULL,
+	`titular_cheque` VARCHAR(255) NULL DEFAULT NULL,
+	`data_recebimento` DATE NULL,
+	`quem_recebeu` VARCHAR(255) NULL,
+	`id_conta_corrente` INT NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=4;

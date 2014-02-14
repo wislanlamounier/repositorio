@@ -1,0 +1,35 @@
+/* Pagina */
+body{overflow: hidden;}
+
+/* Ajustes do Menu Principal */
+.navbar-inner{border-radius: 0; }
+.navbar-inverse .navbar-inner{background: url('../img/bg-menu.png')}
+.navbar-inner .brand{height: 30px;width: 150px; margin: 10px 0 30px 0}
+.navbar-inverse .nav {margin-top: 20px}
+.navbar-inverse .brand, .navbar-inverse .nav > li > a, .navbar-inverse .nav-collapse .nav > li > a, .navbar-inverse .nav-collapse .dropdown-menu a{color:#fff}
+.navbar-inner .brand em{font-size: 11px;}
+
+/* MAPA */
+.mapa{position:absolute; top:0; left:0; height: 100%; height: 100%; float: left; width: 100%; z-index: -1;}
+#message { position:absolute; padding:10px; background:#555; color:#fff; width:75px; }
+div > div > div > .gomapMarker{}
+
+/* BOX INFO */
+.boxMarker .imagem {
+    float: left;
+    width:150px;
+    height:200px; 
+    margin: 5px;
+    overflow: hidden;
+}
+.boxMarker .descricao h1 {
+    font-size: 15px;
+    margin: 0;
+    padding: 0;
+}
+.boxMarker .descricao {
+    font-size: 12px;
+    float: left;
+}
+
+.line{border:1px solid red}
