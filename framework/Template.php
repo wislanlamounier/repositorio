@@ -43,7 +43,17 @@ class Template extends Html{
 	function breadcrumbs(){
 		$mod = ucfirst($_GET['mod']);
 		$acao = ucfirst($_GET['acao']);
+
+		//ALTERANDO BREADCRUMBS, CONTASARECEBERIMOVEIS PASSOU A SER CONTAS A RECEBER
+		if ($mod == "Contasreceberimoveis") {
+			$mod = "Contas a Receber";
+		}
 		
+		//ALTERANDO BREADCRUMBS, CONTASARECEBER PASSOU A SER CONTAS A RECEBER (IMOVEIS)
+		if ($mod == "Lancamento") {
+			$mod = "Contas a Receber (Imóveis)";
+		}
+
 		$string = '<li><a href="'.$this->url('admin/home', true).'"><i class="icon-home"></i></a></li>
                     <li><a href="'.$this->url($_GET['mod'].'/home', true).'">'.$mod.'</a></li>
                     <li><a href="'.$this->url($_GET['mod'].'/'.$_GET['acao'], true).'">'.$acao.'</a></li>';
