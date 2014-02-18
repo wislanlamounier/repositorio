@@ -9,6 +9,7 @@
 					<thead>
 						<tr>
 							<th style="width: 120px">Ações</th>
+							<th>Fornecedor</th>
 							<th>Nº do Documento</th>
 <!--							<th>Data da Conta</th>-->
 							<th>Valor Total</th>
@@ -22,6 +23,9 @@
 									<?php echo $this->botaoAlterar($item->id);?> 
 									<?php echo $this->botaoAjaxRemover($item->id); ?>
 									<?php echo $this->botaoIcone('contaspagar/parcelas/'.$item->id,'icon-edit'); ?>
+								</td>
+								<td>
+									<?php echo $item->nome; ?>
 								</td>
 								<td><?php echo $item->numero_documento; ?></td>
 <!--								<td>--><?php //echo DMA($item->data_conta_pagar); ?><!--</td>-->
