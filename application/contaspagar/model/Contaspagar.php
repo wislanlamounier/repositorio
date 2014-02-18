@@ -15,6 +15,8 @@ class Contaspagar extends Model{
 	public $total_parcelas;
 	public $ordem_de_compra;
 	public $rateio;
+	public $observacao;
+
 	
 	function __construct(){
 		$this->tabela = 'conta_pagar';
@@ -35,6 +37,7 @@ class Contaspagar extends Model{
 			'data_conta_pagar'=>array('data', 'Data da Conta a pagar', array('class'=>'validate[required]', 'value'=>DMA($this->data_conta_pagar))),
 			'total_parcelas'=>array('input', 'Total de Parcelas', array('class'=>'validate[required]', 'value'=>$this->total_parcelas)),
 			'ordem_de_compra'=>array('input', 'Ordem de Compra', array('class'=>'', 'value'=>$this->ordem_de_compra)),
+			'observacao'=>array('editor', 'Observação', array('class'=>''), $this->observacao),
 			'anexo'=>array('file','Anexo',array())
 		);
 	}
@@ -49,6 +52,7 @@ class Contaspagar extends Model{
 				conta.*, pes.nome
 				from conta_pagar conta
 				inner join pessoa pes on pes.id = conta.id_pessoa';
+
 				
 		return Conexao::listarSql($sql);
 	}
