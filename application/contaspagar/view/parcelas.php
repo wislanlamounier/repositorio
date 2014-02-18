@@ -11,7 +11,7 @@
 				<table class="table table-striped dataTables_full table table-striped">
 					<thead>
 						<tr>
-							<th>Empreendimento</th>
+							<th>Fornecedor</th>
 							<th>Número do documento</th>
 							<th>Valor Total</th>
 						</tr>
