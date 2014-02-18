@@ -2,6 +2,36 @@
 	<div class="span12">
 		<div class="w-box">
 			<div class="w-box-header">
+				<h4>Dados do Lançamento</h4>
+			</div>
+			<?php 
+				//debug($colecao);
+			?>
+			<div class="w-box-content">
+				<table class="table table-striped dataTables_full table table-striped">
+					<thead>
+						<tr>
+							<th>Empreendimento</th>
+							<th>Número do documento</th>
+							<th>Valor Total</th>
+						</tr>
+					</thead>
+					<tbody>
+							<tr>
+								<td><?php echo $colecao->lista[0]->nome; ?></td>
+								<td><?php echo $colecao->lista[0]->numero_documento; ?></td>
+								<td><?php echo Util::moedaVisao($colecao->lista[0]->valor_total); ?></td>
+							</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row-fluid">
+	<div class="span12">
+		<div class="w-box">
+			<div class="w-box-header">
 				<h4>Parcelas</h4>
 			</div>
 			<div class="w-box-content">
