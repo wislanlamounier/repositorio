@@ -198,11 +198,15 @@
 
 			$('#id').val(id);
 
-			if(tipo != comissao_imob){
-				$('#id_conta_corrente').parents('.formSep').hide();
-			}else{
-				$('#id_conta_corrente').parents('.formSep').show();
-			}
+            $('#id_conta_corrente').parents('.formSep').show();
+
+            /*
+            if(tipo != comissao_imob){
+                $('#id_conta_corrente').parents('.formSep').hide();
+            }else{
+                $('#id_conta_corrente').parents('.formSep').show();
+            }
+            */
 
             $('.baixa form #valor').val( $(this).attr('data-valor') );
             $('.baixa form #nota_fiscal').val( $(this).attr('data-nota') );
