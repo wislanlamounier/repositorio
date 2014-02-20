@@ -86,6 +86,8 @@
                                                 }
 
                                             echo $this->botaoAjax('excluir-comissao','icon-remove',array('data-id'=>$item->id));
+                                            echo $this->botaoIcone('comissao/alteracao/'.$item->id,'icon-edit');
+
 										}
 									?>
 								</td>
