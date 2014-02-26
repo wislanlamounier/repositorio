@@ -57,6 +57,7 @@
                                         }else{
 											echo $this->botaoIcone('contaspagar/pagarparcela/'.$item->id, 'icon-thumbs-up');
                                             echo $this->botaoAjax('excluir-parcela','icon-remove',array('data-id'=>$item->id));
+                                            echo $this->botaoIcone('contaspagar/pagarparcela/'.$item->id,'icon-edit');
 										}
 
 
