@@ -13,6 +13,9 @@
 							<th>Data Venda</th>
 							<th>Valor Venda</th>
 							<th>Empreendimento</th>
+							<th>N</th>
+							<th>Bloco</th>
+							<th>Quadra</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -29,6 +32,9 @@
 								<td><?php echo DMA($item->data_venda); ?></td>
 								<td><?php echo @Util::moedaVisao($item->valor_venda); ?></td>
 								<td><?php echo $item->empreendimento; ?></td>
+								<td><?php echo $item->empreendimento_numero; ?></td>
+								<td><?php echo $item->empreendimento_bloco; ?></td> 
+								<td><?php echo $item->empreendimento_quadra; ?></td>
 							</tr>
 						<?php }; ?>
 					</tbody>
