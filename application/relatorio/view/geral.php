@@ -227,7 +227,7 @@
             </thead>
             <tbody>
             <tr>
-                <td>Destratos</td>
+                <td>Distratos</td>
                 <td>X</td>
             </tr>
             <tr>
