@@ -49,6 +49,7 @@ class Contasreceberimoveis extends Model{
 				conta.*, pes.nome
 				from conta_receber_imoveis conta
 				inner join pessoa pes on pes.id = conta.id_pessoa';
+		//debug($sql);
 				
 		return Conexao::listarSql($sql);
 	}

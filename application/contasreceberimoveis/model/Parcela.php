@@ -7,6 +7,7 @@ class Parcela extends Model{
 	public $data_vencimento;
 	public $valor;
 	public $status;
+	public $valor_total;
 
 
 	function __construct(){
@@ -20,7 +21,8 @@ class Parcela extends Model{
 			'numero_parcela'=>array('input', 'Número da Parcela', array('value'=>$this->numero_parcela)),
 			'data_vencimento'=>array('data', 'Data Vencimento', array('value'=>$this->data_vencimento)),
 			'valor'=>array('money', 'Valor', array('value'=>$this->valor)),
-			'status'=>array('select','Status', array(''), $this->getStatus(), $this->status)
+			'status'=>array('select','Status', array(''), $this->getStatus(), $this->status),
+			'valor_total'=>array('input', 'Valor Total', array('value'=> (!$this->valor_total) ? $this->valor_parcela : $this->valor_total  ,'readonly'=>'readonly','class'=>'pagamento'))
 		);
 	}
 
@@ -45,7 +47,7 @@ class Parcela extends Model{
 	}
 
 	function listar($where){
-		$sql = 'select parcela.*, pagamento.id as id_pagamento from conta_receber_parcela_imoveis parcela
+		$sql = 'select parcela.*, pagamento.valor_total, pagamento.id as id_pagamento from conta_receber_parcela_imoveis parcela
 				LEFT JOIN conta_receber_pagamento_imoveis pagamento on parcela.id = pagamento.id_parcela
 				where '.$where;
 
