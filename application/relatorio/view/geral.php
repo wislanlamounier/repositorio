@@ -207,12 +207,28 @@
             </thead>
             <tbody>
             <tr>
-                <td>Lucro</td>
+                <td>Receitas</td>
                 <td><?=Util::moedaVisao($totalReceitaPeriodo)?></td>
             </tr>
             <tr>
-                <td>Prejuizo</td>
+                <td>Despesas</td>
                 <td><?=Util::moedaVisao($totalDespesasPeriodo)?></td>
+            </tr>
+            <tr>                                  
+                <?php
+                    $valorTotal = $totalReceitaPeriodo - $totalDespesasPeriodo;
+                    if ($valorTotal < 0) :
+                ?>
+                <td class="alert-danger">
+                    <strong>Total (Prejuízo)</strong>
+                </td>
+                <td class="alert-danger"><?php echo Util::moedaVisao($valorTotal);?></td>
+                <?php else : ?>
+                <td class="alert-info">
+                    <strong>Total (Lucro)</strong>
+                </td>
+                <td class="alert-info"><?php echo Util::moedaVisao($valorTotal);?></td>
+                <?php endif; ?>
             </tr>
             </tbody>
         </table>
