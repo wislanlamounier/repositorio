@@ -4,14 +4,11 @@
 			<div class="w-box-header">
 				<h4>Dados do Lançamento</h4>
 			</div>
-			<?php 
-				//debug($colecao);
-			?>
 			<div class="w-box-content">
 				<table class="table table-striped dataTables_full table table-striped">
 					<thead>
 						<tr>
-							<th>Fornecedor</th>
+							<th>Empreendimento</th>
 							<th>Número do documento</th>
 							<th>Valor Total</th>
 						</tr>
@@ -41,6 +38,7 @@
 							<th style="width: 100px">Ações</th>
 							<th style="width: 30px">Parcela</th>
 							<th>Valor</th>
+							<th>Valor Pago</th>
 							<th>Vencimento</th>
 							<th>Status</th>
 						</tr>
@@ -57,7 +55,8 @@
                                         }else{
 											echo $this->botaoIcone('contaspagar/pagarparcela/'.$item->id, 'icon-thumbs-up');
                                             echo $this->botaoAjax('excluir-parcela','icon-remove',array('data-id'=>$item->id));
-                                            echo $this->botaoIcone('contaspagar/parcela/'.$item->id,'icon-edit');
+                                            //echo $this->botaoIcone('contaspagar/pagarparcela/'.$item->id,'icon-edit');
+
 										}
 
 
@@ -65,6 +64,7 @@
 								</td>
 								<td><?php echo $item->numero_parcela; ?></td>
 								<td>R$ <?php echo number_format($item->valor, 2, ',', '.'); ?></td>
+								<td>R$ <?php echo number_format($item->valor_total, 2, ',', '.'); ?></td>
 								<td><?php echo DMA($item->data_vencimento); ?></td>
 								<td><?php echo Parcela::getStatus($item->status); ?></td>
 							</tr>

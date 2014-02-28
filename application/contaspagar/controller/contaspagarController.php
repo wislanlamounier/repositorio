@@ -127,7 +127,7 @@ class contaspagarController extends DefaultController{
 		$_POST['valor_total'] = Util::moedaBanco($_POST['valor_total']);
 		$_POST['juros'] = Util::moedaBanco($_POST['juros']);
 		$_POST['desconto'] = Util::moedaBanco($_POST['desconto']);
-		$_POST['valor_parcela'] = Util::moedaBanco($_POST['valor_parcela']);
+		//$_POST['valor_parcela'] = Util::moedaBanco($_POST['valor_parcela']);
 
         $this->carregarSubModulo('contacorrente','extrato');
         /** @var $this->extrato Extrato */
@@ -144,7 +144,7 @@ class contaspagarController extends DefaultController{
         $extrato['id_conta_corrente'] = $_POST['id_conta_corrente'];
         $extrato['tipo'] = 'D';
         $extrato['saldo_anterior'] = $contaCorrente->saldo;
-        $extrato['valor'] = $parcela->valor;
+        $extrato['valor'] = $_POST['valor_total'];
         $extrato['data'] = $_POST['data_pagamento'];
         $extrato['id_conta_contabil'] = $contaPagar->id_conta_contabil;
         $extrato['id_conta_contabil_sub'] = $contaPagar->id_conta_contabil_sub;
@@ -155,7 +155,7 @@ class contaspagarController extends DefaultController{
 		};
 
 		$dadosBaixa  = array('id_parcela'=>$_POST['id_parcela'], 
-							 'valor_pago'=>$_POST['valor_parcela'], 
+							 'valor_pago'=>$_POST['valor_total'], 
 							 'data_pagamento'=>$_POST['data_pagamento'], 
 							 'juros'=>$_POST['juros'], 
 							 'desconto'=>$_POST['desconto'], 

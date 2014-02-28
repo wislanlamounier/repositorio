@@ -52,7 +52,7 @@ class Parcela extends Model{
 	}
 
 	function listar($where){
-		$sql = 'select conta.valor_total, conta.numero_documento, pes.nome, conta.id, parcela. * , pagamento.id AS id_pagamento
+		$sql = 'select conta.valor_total, conta.numero_documento, pes.nome, conta.id, parcela. * , pagamento.id AS id_pagamento, pagamento.valor_total
 				FROM conta_pagar_parcela parcela
 				LEFT JOIN conta_pagar_pagamento pagamento ON parcela.id = pagamento.id_parcela
 				INNER JOIN conta_pagar AS conta ON conta.id = id_conta_pagar
