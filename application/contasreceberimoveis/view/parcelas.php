@@ -10,7 +10,8 @@
 						<tr>
 							<th style="width: 100px">Ações</th>
 							<th style="width: 30px">Parcela</th>
-							<th>Valor</th>
+							<th>Valor Parcela</th>
+							<th>Valor Pago</th>
 							<th>Vencimento</th>
 							<th>Status</th>
 						</tr>
@@ -34,6 +35,7 @@
 								</td>
 								<td><?php echo $item->numero_parcela; ?></td>
 								<td>R$ <?php echo number_format($item->valor, 2, ',', '.'); ?></td>
+								<td>R$ <?php echo number_format($item->valor_total, 2, ',', '.'); ?></td>
 								<td><?php echo DMA($item->data_vencimento); ?></td>
 								<td><?php echo Parcela::getStatus($item->status); ?></td>
 							</tr>
