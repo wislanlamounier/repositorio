@@ -33,6 +33,11 @@
                         <td>Saldo</td>
                     </tr>
                        <?php foreach ($colecao->dados as $item) { ?>
+                       <?php
+                        //debug($item);
+
+                       ?>
+
                     <tr>
                             <td> <?=$item->tipo?> </td>
                             <td> <?=DMA($item->data)?> </td>
@@ -57,7 +62,7 @@
         <br />
         <div class="row">
             <div class="span4">
-                <span><strong>Saldo no dia 23/11/2013:</strong><?= Util::moedaVisao($colecao->contaCorrente->saldo) ?></span>
+                <span><strong>Saldo Final: </strong><?= Util::moedaVisao($valorTotal) ?></span>
             </div>
         </div>
         <br />
