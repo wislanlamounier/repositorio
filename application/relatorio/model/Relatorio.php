@@ -1,16 +1,33 @@
 <?php
 
 class Relatorio extends Model{
-    public function gerarRelatorioConciliacao($dataInicial, $dataFinal, $conta){
-        $sql = "SELECT cb.*, con.nome FROM conciliacao_bancaria cb
-                inner join conta_corrente con ON con.id = cb.id_conta_corrente
-                where data between '".AMD($dataInicial)."' AND '".AMD($dataFinal)."' AND id_conta_corrente = ".$conta." ORDER BY data, id ASC";
-	//debug ($sql);
+
+    public function gerarRelatorioCentroCusto($centrocusto){
+        $sql = "SELECT centro.id, centro.nome, cpagar.valor_total as valor_total_pagar, cimoveis.valor_total as valor_total_receber, lanca.valor_venda as lancamento_venda FROM centro_custo centro
+            LEFT JOIN conta_pagar cpagar
+            ON centro.id = cpagar.id_centro_custo_final
+            LEFT JOIN conta_receber_imoveis cimoveis
+            ON centro.id = cimoveis.id_centro_custo_final
+            LEFT JOIN lancamento lanca
+            ON centro.id = lanca.id_centro_custo_final
+            WHERE centro.id = ".$centrocusto."";        
+
         $resultado = Conexao::listarSql($sql);
 
         return $resultado;
 
     }
+
+    public function gerarRelatorioConciliacao($dataInicial, $dataFinal, $conta){
+        $sql = "SELECT cb.*, con.nome FROM conciliacao_bancaria cb
+                inner join conta_corrente con ON con.id = cb.id_conta_corrente
+                where data between '".AMD($dataInicial)."' AND '".AMD($dataFinal)."' AND id_conta_corrente = ".$conta." ORDER BY data, id ASC";
+        $resultado = Conexao::listarSql($sql);
+
+        return $resultado;
+
+    }
+
 
     public function gerarRelatorioGeral($mes, $ano, $contas, $subContasContabeis){
 
@@ -224,4 +241,16 @@ class Relatorio extends Model{
 
         return $dados;
     }
+
+
+    public function getJurosDesconto($conta){
+        $sql = "SELECT * FROM `conta_pagar_baixa`  
+                WHERE id_conta_corrente = ".$conta." and juros or desconto <> '' ";
+        
+       //debug($sql);
+        $resultado = Conexao::listarSql($sql);
+
+        return $resultado;        
+    }  
+ 
 }
