@@ -12,6 +12,53 @@ class Relatorio extends Model{
 
     }
 
+  public function gerarRelatorioCentroCusto($dataInicial, $dataFinal, $centrocusto){
+        // $sql = "SELECT centro.id, centro.nome, cpagar.valor_total as valor_total_pagar, cimoveis.valor_total as valor_total_receber, lanca.valor_venda as lancamento_venda FROM centro_custo centro
+        //         LEFT JOIN conta_pagar cpagar
+        //         ON centro.id = cpagar.id_centro_custo_final
+        //         LEFT JOIN conta_receber_imoveis cimoveis
+        //         ON centro.id = cimoveis.id_centro_custo_final
+        //         LEFT JOIN lancamento lanca
+        //         ON centro.id = lanca.id_centro_custo_final
+        //         WHERE centro.id = ".$centrocusto."";
+
+        $sql = "SELECT centro.id, 
+                centro.nome, 
+                cpagar.valor_total AS valor_total_pagar, 
+                cpagar.data_conta_pagar, 
+                cpagar.id_conta_contabil_sub, 
+                cpagar.id_conta_contabil,
+                ccontabil.nome AS conta_contabil_nome,
+                ccontabilsub.nome AS sub_conta_nome
+                FROM centro_custo centro
+                INNER JOIN conta_pagar cpagar ON centro.id = cpagar.id_centro_custo_final
+                INNER JOIN conta_contabil ccontabil on cpagar.id_conta_contabil = ccontabil.id
+                INNER JOIN conta_contabil_sub ccontabilsub on cpagar.id_conta_contabil_sub = ccontabilsub.id
+                WHERE cpagar.data_conta_pagar between '".AMD($dataInicial)."' AND '".AMD($dataFinal)."' AND centro.id = ".$centrocusto." ORDER BY ccontabil.nome";
+        //debug($sql);
+
+        $resultado = Conexao::listarSql($sql);
+
+        return $resultado;
+
+    }
+
+
+
+    public function gerarRelatorioconta_imoveis($dataInicial, $dataFinal, $centro){
+        $sql = "SELECT centro.id, centro.nome, cimoveis.id, cimoveis.valor_total, cimoveis.data_emissao, cimoveis.data_conta_pagar FROM centro_custo centro
+                inner join conta_receber_imoveis cimoveis on cimoveis.id_centro_custo_final = centro.id 
+                where centro.id = '".$centro."' ORDER BY cimoveis.data_conta_pagar DESC";
+        $resultado = Conexao::listarSql($sql);
+
+        return $resultado;
+
+    }
+
+    public function getCentroCustoReceberImoveis (){
+
+    }
+
     public function gerarRelatorioGeral($mes, $ano, $contas, $subContasContabeis){
 
         $saldoContasCorrentes = array();

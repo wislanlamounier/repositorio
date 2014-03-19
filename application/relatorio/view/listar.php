@@ -17,6 +17,7 @@
                                 <option value="conciliacao">Conciliação Bancária</option>
                                 <option value="contas_pagar">Contas a Pagar</option>
                                 <option value="contas_receber">Contas a Receber</option>
+                               <option value="centroCusto">Centro de Custo</option>
                             </select>
                         </div>
                         <div class="clear"></div>
@@ -199,6 +200,45 @@
                     </div>
                 </div>
             </fieldset>
+
+             <fieldset class="centroCusto" style="display: none">
+                <div class="formSep">
+                    <div class="control-group">
+                        <div class="control-label">
+                            <label>Centro de Custo: <span class="f_req">*</span></label>
+                        </div>
+                        <div class="controls">
+                            <select name="centroCusto">
+                            <?php foreach($colecao->centrosCusto as $item){ ?>
+                            <option value="<?=$item->id?>"><?=$item->nome?></option>
+                            <?php }; ?>
+                            </select>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="formSep">
+                        <div class="control-group">
+                            <div class="control-label"><label>Data Inicial: <span class="f_req">*</span></label></div>
+                            <div class="controls">
+                                <input type="text" name="dataCusto[dataInicial]" class="validate[required] maskData"/>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+
+                    <div class="formSep">
+                        <div class="control-group">
+                            <div class="control-label"><label>Data Final: <span class="f_req">*</span></label></div>
+                            <div class="controls">
+                                <input type="text" name="dataCusto[dataFinal]" class="validate[required] maskData"/>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+            </fieldset>
+
+
             <div class="form-actions">
                 <input type="submit" class="btn btn-success" value="Salvar">
                 <a onclick="javascript:window.history.go(-1);" class="btn botao-voltar-form">Voltar</a>

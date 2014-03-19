@@ -1,13 +1,18 @@
 <?php
 
 class relatorioController extends DefaultController{
+
     public function listar(){
         $this->carregarModulo(array('pessoa','tipocomissao'));
 		$this->carregarSubModulo('contacorrente','contacorrente');
+        $this->carregarSubModulo('centrocusto','centrocusto');
+        $centroscusto = $this->centrocusto->listar();
         $contas = $this->contacorrente->listar();
         $this->view->fornecedor = $this->pessoa->listar();
         $this->view->tipoComissao = $this->tipocomissao->listar();
         $this->view->contasCorrente = $contas;
+        $this->view->centrosCusto = $centroscusto; 
+
     }
 
     public function dados(){
@@ -92,6 +97,23 @@ class relatorioController extends DefaultController{
 
         $this->template->setPagina('geral');
 
+    }
+
+    public function gerarRelatorioCentroCusto($post){
+        
+        $dataInicial    = $post['dataCusto']['dataInicial'];
+        $dataFinal      = $post['dataCusto']['dataFinal'];
+        $centroCusto    = $post['centroCusto'];
+
+        $this->carregarModulo(array('relatorio'));
+        $this->carregarSubModulo('centrocusto','centrocusto');
+        
+        $dados = $this->relatorio->gerarRelatorioCentroCusto($dataInicial, $dataFinal, $centroCusto);
+        $this->view->dados = $dados;
+        
+        $this->view->centroCusto = $this->centrocusto->retornarObjeto($centroCusto);
+        
+        $this->template->setPagina('centro_custo');
     }
 
     public function gerarRelatorioPeriodo($post){
