@@ -3,15 +3,18 @@
 class relatorioController extends DefaultController{
 
     public function listar(){
-        $this->carregarModulo(array('pessoa','tipocomissao'));
+        //$this->carregarModulo('contaCorrente');
 		$this->carregarSubModulo('contacorrente','contacorrente');
         $this->carregarSubModulo('centrocusto','centrocusto');
         $centroscusto = $this->centrocusto->listar();
         $contas = $this->contacorrente->listar();
-        $this->view->fornecedor = $this->pessoa->listar();
-        $this->view->tipoComissao = $this->tipocomissao->listar();
+
+        $this->view->centrosCusto = $centroscusto;        
         $this->view->contasCorrente = $contas;
+<<<<<<< HEAD
         $this->view->centrosCusto = $centroscusto; 
+=======
+>>>>>>> FETCH_HEAD
 
     }
 
@@ -26,44 +29,21 @@ class relatorioController extends DefaultController{
         }
     }
 
-    public function gerarRelatoriocontas_pagar($post){
-        $dataInicial = $post['contas_pagar']['dataInicial'];
-        $dataFinal = $post['contas_pagar']['dataFinal'];
-
-        if(!$dataInicial || !$dataFinal)
-            throw new Exception('Digite as datas');
-
-        $this->carregarModulo('contaspagar');
-        $dados = $this->contaspagar->relatorio($dataInicial, $dataFinal, $post['contas_pagar']['fornecedor'],$post['contas_pagar']['baixados']);
-
-        $this->view->dados = $dados;
-        $this->template->setPagina('contas_pagar');
-    }
-
-    public function gerarRelatoriocontas_receber($post){
-        $dataInicial = $post['contas_receber']['dataInicial'];
-        $dataFinal = $post['contas_receber']['dataFinal'];
-
-        if(!$dataInicial || !$dataFinal)
-            throw new Exception('Digite as datas');
-
-        $this->carregarModulo('comissao');
-        $dados = $this->comissao->relatorioContaReceber($dataInicial, $dataFinal, $post['contas_receber']['cliente'],$post['contas_receber']['tipo_comissao']);
-
-        $this->view->dados = $dados;
-        $this->template->setPagina('contas_receber');
-    }
-
-    public function gerarRelatorioConciliacao($post){
+    public function gerarRelatorioConciliacao($post){        
         $dataInicial = $post['conciliacao']['dataInicial'];
         $dataFinal = $post['conciliacao']['dataFinal'];
         $contaCorrente = $post['contaCorrente'];
+        $jurosDesconto = $this->relatorio->getJurosDesconto($contaCorrente);
 
         $this->carregarModulo(array('relatorio'));
 		$this->carregarSubModulo('contacorrente','contacorrente');
-        $dados = $this->relatorio->gerarRelatorioConciliacao($dataInicial, $dataFinal, $contaCorrente);
-		
+        
+        
+        $dados = $this->relatorio->gerarRelatorioConciliacao($dataInicial, $dataFinal, $contaCorrente, $jurosDesconto);
+
+        
         $this->view->dados = $dados;
+
         $this->view->contaCorrente = $this->contacorrente->retornarObjeto($contaCorrente);
 
         $this->template->setPagina('conciliacao');
@@ -97,6 +77,24 @@ class relatorioController extends DefaultController{
 
         $this->template->setPagina('geral');
 
+    }
+    public function gerarRelatorioCentroCusto($post){
+        
+        $centroCusto = $post['centroCusto'];
+
+        $this->carregarModulo(array('relatorio'));
+        $this->carregarSubModulo('centrocusto','centrocusto');
+        
+        
+        $dados = $this->relatorio->gerarRelatorioCentroCusto($centroCusto);
+
+        
+        $this->view->dados = $dados;
+        debug($this->view->dados);
+
+        $this->view->centroCusto = $this->contacorrente->retornarObjeto($centroCusto);
+
+        // $this->template->setPagina('centrocusto');
     }
 
     public function gerarRelatorioCentroCusto($post){
